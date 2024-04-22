@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_lingodingo/core/constants/urls.dart';
 
 class LanguageAvatar extends StatelessWidget {
@@ -17,7 +18,6 @@ class LanguageAvatar extends StatelessWidget {
             width: 30,
             child: Image(
               image: NetworkImage(spainFlag),
-              fit: BoxFit.contain,
             )),
       ),
     );

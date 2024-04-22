@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lingodingo/core/theme/app_pallete.dart';
+import 'package:flutter_lingodingo/models/sections_model.dart';
 import 'package:flutter_lingodingo/pages/lessons_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,20 +12,83 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<SectionModel> sections = [];
+
+  void _getSections() {
+    sections = SectionModel.getSections();
+  }
+
   @override
   Widget build(BuildContext context) {
+    _getSections();
     return Scaffold(
-        body: Center(
-      child: TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LessonsPage(),
+      body: ListView.builder(
+          padding: const EdgeInsets.all(5),
+          physics: const BouncingScrollPhysics(),
+          itemCount: sections.length,
+          itemBuilder: (BuildContext context, index) {
+            return GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LessonsPage(),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10.0),
+                child: Card(
+                  color: AppPallete.transparentColor,
+                  // surfaceTintColor: AppPallete.transparentColor,
+                  borderOnForeground: true,
+                  shape: RoundedRectangleBorder(
+                      side: const BorderSide(
+                          color: AppPallete.borderColor, width: 3),
+                      borderRadius: BorderRadius.circular(20)),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  elevation: 10,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(1),
+                        child: Image.asset(
+                          sections[index].sectionImage,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15.0, left: 20.0),
+                        child: Text(
+                          sections[index].sectionName,
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.only(left: 20.0, bottom: 20.0),
+                        child: Text(
+                          sections[index].sectionDescription,
+                          style: GoogleFonts.poppins(
+                            textStyle: const TextStyle(
+                              fontWeight: FontWeight.normal,
+                              color: AppPallete.gradient3,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
             );
-          },
-          child: const Text("Lessons")),
-    ));
+          }),
+    );
   }
 }
