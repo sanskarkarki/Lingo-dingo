@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lingodingo/core/theme/app_pallete.dart';
 import 'package:flutter_lingodingo/models/sections_model.dart';
-import 'package:flutter_lingodingo/pages/lessons_page.dart';
+import 'package:flutter_lingodingo/pages/lesson/lessons_list_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class SectionsPage extends StatefulWidget {
+  const SectionsPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<SectionsPage> createState() => _SectionsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _SectionsPageState extends State<SectionsPage> {
   List<SectionModel> sections = [];
 
   void _getSections() {
@@ -30,11 +31,16 @@ class _HomePageState extends State<HomePage> {
             return GestureDetector(
               onTap: () {
                 Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LessonsPage(),
-                  ),
-                );
+                    context,
+                    PageTransition(
+                      child: LessonsListPage(
+                        sectionName: sections[index].sectionName,
+                        sectionDescription: sections[index].sectionDescription,
+                        lessonName: sections[index].lessonName,
+                        lessonDescription: sections[index].lessonDescription,
+                      ),
+                      type: PageTransitionType.bottomToTop,
+                    ));
               },
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
