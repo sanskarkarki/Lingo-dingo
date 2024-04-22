@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lingodingo/core/theme/app_pallete.dart';
-import 'package:flutter_lingodingo/pages/landing_page.dart';
-import 'package:flutter_lingodingo/pages/signup_page.dart';
+import 'package:flutter_lingodingo/pages/home/home_page.dart';
+import 'package:flutter_lingodingo/pages/auth/login_page.dart';
 import 'package:flutter_lingodingo/widgets/button_widget.dart';
 import 'package:flutter_lingodingo/widgets/textfield_widget.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
+    nameController.dispose();
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
@@ -35,29 +37,28 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Text(
-                "Login",
+                "Sign Up",
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 30),
+              TextInputField(hintText: "Name", controller: nameController),
+              const SizedBox(height: 20),
               TextInputField(hintText: "Email", controller: emailController),
               const SizedBox(height: 20),
               TextInputField(
-                hintText: "Password",
-                controller: passwordController,
-                isObscureText: true,
-              ),
+                  hintText: "Password", controller: passwordController),
               const SizedBox(height: 20),
               ButtonWidget(
-                buttonText: "Login",
+                buttonText: "Sign Up",
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const LandingPage(),
+                          builder: (context) => const HomePage(),
                         ),
                         (Route<dynamic> route) => false);
                   }
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    "Don't have an account? ",
+                    "Already have an account? ",
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w400,
@@ -79,12 +80,12 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignUpPage(),
+                          builder: (context) => const LoginPage(),
                         ),
                       );
                     },
                     child: const Text(
-                      "Sign Up",
+                      "Login",
                       style: TextStyle(
                         color: AppPallete.gradient2,
                         fontSize: 14,
@@ -93,7 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ),
                 ],
-              ),
+              )
             ],
           ),
         ),

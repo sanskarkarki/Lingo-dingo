@@ -1,8 +1,7 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_lingodingo/core/theme/theme.dart';
-// import 'package:flutter_lingodingo/pages/landing_page.dart';
-import 'package:flutter_lingodingo/pages/login_page.dart';
+import 'package:flutter_lingodingo/pages/auth/login_page.dart';
 
 void main() => runApp(
       DevicePreview(

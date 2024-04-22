@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_lingodingo/core/theme/app_pallete.dart';
-import 'package:flutter_lingodingo/pages/home_page.dart';
-import 'package:flutter_lingodingo/pages/notifications_page.dart';
+import 'package:flutter_lingodingo/pages/quiz/quiz_list_page.dart';
+import 'package:flutter_lingodingo/pages/sections_page.dart';
 import 'package:flutter_lingodingo/pages/profile_page.dart';
 import 'package:flutter_lingodingo/widgets/language_avatar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-class LandingPage extends StatefulWidget {
-  const LandingPage({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<LandingPage> createState() => _LandingPageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _LandingPageState extends State<LandingPage> {
+class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
   final tabs = [
-    const NotificationsPage(),
-    HomePage(),
+    const QuizListPage(),
+    const SectionsPage(),
     const ProfilePage(),
   ];
 
@@ -24,29 +25,30 @@ class _LandingPageState extends State<LandingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: AppPallete.transparentColor,
         elevation: 0,
-        title: const Text(
-          "Lingo Dingo",
-          style: TextStyle(
-            color: AppPallete.gradient1,
-            fontSize: 25,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
+        title: Text("Lingo Dingo",
+            style: GoogleFonts.poppins(
+              textStyle: const TextStyle(
+                color: AppPallete.gradient3,
+                fontSize: 25,
+                fontWeight: FontWeight.w600,
+              ),
+            )),
         centerTitle: true,
-        leading: const Row(
+        leading: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
+            const Icon(
               Icons.electric_bolt,
               color: AppPallete.gradient3,
             ),
-            Text(
-              "10",
-              style: TextStyle(
-                color: AppPallete.gradient3,
-              ),
-            ),
+            Text("10",
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    color: AppPallete.gradient3,
+                  ),
+                )),
           ],
         ),
         actions: const [
@@ -57,18 +59,19 @@ class _LandingPageState extends State<LandingPage> {
       bottomNavigationBar: BottomNavigationBar(
           elevation: 0,
           backgroundColor: AppPallete.backgroundColor,
-          selectedItemColor: AppPallete.gradient1,
+          selectedItemColor: AppPallete.gradient3,
+          unselectedItemColor: AppPallete.greyColor,
           showUnselectedLabels: false,
           currentIndex: _selectedIndex,
           type: BottomNavigationBarType.fixed,
           items: const [
             BottomNavigationBarItem(
-              icon: Icon(Icons.notifications),
-              label: "Notifications",
+              icon: Icon(Icons.lightbulb),
+              label: "Quiz",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: "Home",
+              icon: Icon(Icons.book),
+              label: "Sections",
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.person),
