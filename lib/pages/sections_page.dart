@@ -36,6 +36,7 @@ class _SectionsPageState extends State<SectionsPage> {
                       child: LessonsListPage(
                         sectionName: sections[index].sectionName,
                         sectionDescription: sections[index].sectionDescription,
+                        lessonNumber: sections[index].lessonNumber,
                         lessonName: sections[index].lessonName,
                         lessonDescription: sections[index].lessonDescription,
                       ),
