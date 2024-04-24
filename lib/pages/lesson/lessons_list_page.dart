@@ -8,12 +8,14 @@ import 'package:page_transition/page_transition.dart';
 class LessonsListPage extends StatefulWidget {
   final String sectionName;
   final String sectionDescription;
+  final List lessonNumber;
   final List lessonName;
   final List lessonDescription;
   const LessonsListPage({
     super.key,
     required this.sectionName,
     required this.sectionDescription,
+    required this.lessonNumber,
     required this.lessonName,
     required this.lessonDescription,
   });
@@ -79,6 +81,7 @@ class _LessonsListPageState extends State<LessonsListPage> {
                             context,
                             PageTransition(
                               child: LessonDetailPage(
+                                lessonNumber: widget.lessonNumber[index],
                                 lessonName: widget.lessonName[index],
                                 lessonDetails: widget.lessonDescription[index],
                               ),
@@ -102,7 +105,9 @@ class _LessonsListPageState extends State<LessonsListPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                widget.lessonName[index],
+                                widget.lessonNumber[index],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
@@ -112,9 +117,21 @@ class _LessonsListPageState extends State<LessonsListPage> {
                                 height: 10,
                               ),
                               Text(
+                                widget.lessonName[index],
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: AppPallete.gradient3,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Text(
                                 widget.lessonDescription[index],
                                 textAlign: TextAlign.justify,
-                                maxLines: 21,
+                                maxLines: 19,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.normal,

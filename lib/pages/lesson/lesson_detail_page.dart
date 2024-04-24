@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_lingodingo/core/theme/app_pallete.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class LessonDetailPage extends StatefulWidget {
+  final String lessonNumber;
   final String lessonName;
   final String lessonDetails;
   const LessonDetailPage({
     super.key,
+    required this.lessonNumber,
     required this.lessonName,
     required this.lessonDetails,
   });
@@ -26,7 +29,9 @@ class _LessonDetailPageState extends State<LessonDetailPage> {
           },
         ),
         title: Text(
-          widget.lessonName,
+          widget.lessonNumber,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
           style: GoogleFonts.poppins(
             textStyle: const TextStyle(
               fontSize: 25,
@@ -43,6 +48,19 @@ class _LessonDetailPageState extends State<LessonDetailPage> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
+              Text(
+                widget.lessonName,
+                style: GoogleFonts.poppins(
+                  textStyle: const TextStyle(
+                    color: AppPallete.gradient3,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
               Text(
                 widget.lessonDetails,
                 textAlign: TextAlign.justify,
